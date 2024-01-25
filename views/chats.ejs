@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"/>
+    <title>Chat History</title>
+</head>
+<body>
+    <header>
+        <h1 class="page-title">All Chats</h1>
+        <form action="/chats/new" method="GET">
+            <button class="new-chat-button">New Chat</button>
+        </form>
+    </header>
+
+    <div class="card-container">
+        <% chats.forEach(chat => { %>
+            <div class="card">
+                <p class="chat-info">From: <%= chat.from %></p>
+                <p class="chat-info">To: <%= chat.to %></p>
+                <p class="chat-text">Message: <%= chat.msg %></p>
+                
+                <form class="edit-form" action="/chats/<%= chat._id %>/update" method="get">
+                    <button>Edit</button>
+                </form>
+                
+                <form class="delete-form" action="/chats/<%=chat._id%>/delete?_method=DELETE" method="POST">
+                    <button>Delete</button>
+                </form>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
